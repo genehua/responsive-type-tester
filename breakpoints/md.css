@@ -1,0 +1,55 @@
+.content-block {
+  column-gap: calc(var(--column_gap_md, 1rem));
+  margin-left: calc(var(--page_margin_md, 0));
+  margin-right: calc(var(--page_margin_md, 0));
+}
+
+.content-block.col-3,
+.content-block.col-4,
+.content-block.col-6 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.tile {
+  padding: calc(var(--content_tile_margin_md, 1rem));
+}
+
+.col {
+  margin-bottom: 2rem;
+}
+
+#layouts h1 {
+  font-size: calc(var(--h1_fontSize_md));
+  line-height: calc(var(--h1_lineHeight_md));
+  letter-spacing: calc(var(--h1_letterSpacing_md));
+}
+
+#layouts h2 {
+  font-size: calc(var(--h2_fontSize_md));
+  line-height: calc(var(--h2_lineHeight_md));
+  letter-spacing: calc(var(--h2_letterSpacing_md));
+}
+
+#layouts h3 {
+  font-size: calc(var(--h3_fontSize_md));
+  line-height: calc(var(--h3_lineHeight_md));
+  letter-spacing: calc(var(--h3_letterSpacing_md));
+}
+
+#layouts h4 {
+  font-size: calc(var(--h4_fontSize_md));
+  line-height: calc(var(--h4_lineHeight_md));
+  letter-spacing: calc(var(--h4_letterSpacing_md));
+}
+
+#layouts p.large {
+  font-size: calc(var(--pLg_fontSize_md));
+  line-height: calc(var(--pLg_lineHeight_md));
+  letter-spacing: calc(var(--pLg_letterSpacing_md));
+}
+
+#layouts p.small {
+  font-size: calc(var(--pSm_fontSize_md));
+  line-height: calc(var(--pSm_lineHeight_md));
+  letter-spacing: calc(var(--pSm_letterSpacing_md));
+}

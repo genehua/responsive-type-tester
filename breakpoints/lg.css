@@ -1,0 +1,45 @@
+.content-block {
+  column-gap: calc(var(--column_gap_lg, 1rem));
+  margin-left: calc(var(--page_margin_lg, 0));
+  margin-right: calc(var(--page_margin_lg, 0));
+}
+
+.tile {
+  padding: calc(var(--content_tile_margin_lg, 1rem));
+}
+
+#layouts h1 {
+  font-size: calc(var(--h1_fontSize_lg));
+  line-height: calc(var(--h1_lineHeight_lg));
+  letter-spacing: calc(var(--h1_letterSpacing_lg));
+}
+
+#layouts h2 {
+  font-size: calc(var(--h2_fontSize_lg));
+  line-height: calc(var(--h2_lineHeight_lg));
+  letter-spacing: calc(var(--h2_letterSpacing_lg));
+}
+
+#layouts h3 {
+  font-size: calc(var(--h3_fontSize_lg));
+  line-height: calc(var(--h3_lineHeight_lg));
+  letter-spacing: calc(var(--h3_letterSpacing_lg));
+}
+
+#layouts h4 {
+  font-size: calc(var(--h4_fontSize_lg));
+  line-height: calc(var(--h4_lineHeight_lg));
+  letter-spacing: calc(var(--h4_letterSpacing_lg));
+}
+
+#layouts p.large {
+  font-size: calc(var(--pLg_fontSize_lg));
+  line-height: calc(var(--pLg_lineHeight_lg));
+  letter-spacing: calc(var(--pLg_letterSpacing_lg));
+}
+
+#layouts p.small {
+  font-size: calc(var(--pSm_fontSize_lg));
+  line-height: calc(var(--pSm_lineHeight_lg));
+  letter-spacing: calc(var(--pSm_letterSpacing_lg));
+}

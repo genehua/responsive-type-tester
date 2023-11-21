@@ -1,0 +1,99 @@
+#layouts {
+  max-width: calc(var(--content_max_width, none));
+}
+
+#layouts h1,
+#layouts h2,
+#layouts h3,
+#layouts h4,
+#layouts h5,
+#layouts h6 {
+  font-family: var(--header_font_family, sans-serif);
+  font-weight: var(--header_font_weight, normal);
+  text-align: var(--text_align, left);
+}
+
+#layouts p {
+  font-family: var(--paragraph_font_family, serif);
+  font-weight: var(--paragraph_font_weight, normal);
+  text-align: var(--text_align, left);
+  max-width: calc(var(--paragraph_max_width, none));
+}
+
+.content-block {
+  column-gap: calc(var(--column_gap_xl, 1rem));
+  margin-left: calc(var(--page_margin_xl, 0));
+  margin-right: calc(var(--page_margin_xl, 0));
+}
+
+.content-block aside {
+  grid-column: 1/-1;
+}
+
+.col {
+  grid-column: span 1;
+}
+
+.content-block.col-2,
+.content-block.col-3,
+.content-block.col-4,
+.content-block.col-6 {
+  display: grid;
+}
+
+.content-block.col-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.content-block.col-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.content-block.col-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.content-block.col-6 {
+  grid-template-columns: repeat(6, 1fr);
+}
+
+.tile {
+  box-sizing: border-box;
+  padding: calc(var(--content_tile_margin_xl, 1rem));
+}
+
+#layouts h1 {
+  font-size: calc(var(--h1_fontSize_xl));
+  line-height: calc(var(--h1_lineHeight_xl));
+  letter-spacing: calc(var(--h1_letterSpacing_xl));
+}
+
+#layouts h2 {
+  font-size: calc(var(--h2_fontSize_xl));
+  line-height: calc(var(--h2_lineHeight_xl));
+  letter-spacing: calc(var(--h2_letterSpacing_xl));
+}
+
+#layouts h3 {
+  font-size: calc(var(--h3_fontSize_xl));
+  line-height: calc(var(--h3_lineHeight_xl));
+  letter-spacing: calc(var(--h3_letterSpacing_xl));
+}
+
+#layouts h4 {
+  font-size: calc(var(--h4_fontSize_xl));
+  line-height: calc(var(--h4_lineHeight_xl));
+  letter-spacing: calc(var(--h4_letterSpacing_xl));
+}
+
+#layouts p.large {
+  font-size: calc(var(--pLg_fontSize_xl));
+  line-height: calc(var(--pLg_lineHeight_xl));
+  letter-spacing: calc(var(--pLg_letterSpacing_xl));
+}
+
+#layouts p.small {
+  font-size: calc(var(--pSm_fontSize_xl));
+  line-height: calc(var(--pSm_lineHeight_xl));
+  letter-spacing: calc(var(--pSm_letterSpacing_xl));
+}

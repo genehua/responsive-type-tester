@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Responsive Type Tester</title>
+    <link rel="stylesheet" href="static.css" />
+
+    <style id="vars"></style>
+    <style id="breakpoints"></style>
+  </head>
+  <body>
+    <details id="header">
+      <summary><h1>Responsive Type Tester</h1></summary>
+      <p>
+        It's difficult to quickly iterate on how type and margins respond to
+        screen size in Figma. This tool is designed to make that process a
+        little easier, with a variety of common typographic layouts set up to
+        assess type and margin sizing.
+        <br /><br />
+        Testing in-browser also gets closer to the real set of options available
+        in production: viewport units and <code>calc()</code> formulations are
+        all likewise difficult to specify and fine-tune in flat layouts.
+      </p>
+    </details>
+    <details id="controls" open>
+      <summary>Edit styles</summary>
+      <form
+        class="styles-form"
+        action="javascript:;"
+        method="get"
+        onsubmit="updateStyles()"
+      >
+        <h2>Setup</h2>
+        <aside>
+          Include units in all fields. For margins and font sizes, you can use
+          <code>calc()</code> values.
+          <a href="https://css-tricks.com/a-complete-guide-to-calc-in-css/"
+            >Syntax for calc()</a
+          >
+        </aside>
+        <section class="definition">
+          <h3>Fonts</h3>
+          <aside>
+            Enter the name of the font as it shows in Font Book or RightFont.
+            Don't include the weight in the font name – set it in the font
+            weight field. You may have to add <code>'</code> around the font
+            name (eg <code>'ABC Diatype Mono'</code>). You must have the fonts
+            installed directly on your computer.
+          </aside>
+          <fieldset>
+            <h4>Headers</h4>
+            <input type="text" class="style-input" id="header_font_family" />
+            <input type="text" class="style-input" id="header_font_weight" />
+          </fieldset>
+          <fieldset>
+            <h4>Paragraphs</h4>
+            <input type="text" class="style-input" id="paragraph_font_family" />
+            <input type="text" class="style-input" id="paragraph_font_weight" />
+          </fieldset>
+        </section>
+        <section class="definition">
+          <h3>Text Options</h3>
+          <fieldset>
+            <h4>Paragraph max width</h4>
+            <input type="text" class="style-input" id="paragraph_max_width" />
+            <h4>Header text align</h4>
+            <select name="text_align" class="style-input" id="text_align">
+              <option value="left">Left</option>
+              <option value="center">Center</option>
+            </select>
+          </fieldset>
+        </section>
+        <h3>Breakpoints</h3>
+        <section class="breakpoints definition">
+          <fieldset>
+            <label for="breakpoint_xl">>Large<span>max-width:</span></label>
+            <label for="breakpoint_lg">Large<span>max-width:</span></label>
+            <label for="breakpoint_md">Medium<span>max-width:</span></label>
+            <label for="breakpoint_sm">Small<span>max-width:</span></label>
+            <input type="text" class="style-input" id="content_max_width" />
+            <input type="text" class="style-input" id="breakpoint_lg" />
+            <input type="text" class="style-input" id="breakpoint_md" />
+            <input type="text" class="style-input" id="breakpoint_sm" />
+          </fieldset>
+        </section>
+        <section class="definition">
+          <h3>Margins</h3>
+          <fieldset class="fieldset">
+            <h4>Page Margin</h4>
+            <input type="text" class="style-input" id="page_margin_xl" />
+            <input type="text" class="style-input" id="page_margin_lg" />
+            <input type="text" class="style-input" id="page_margin_md" />
+            <input type="text" class="style-input" id="page_margin_sm" />
+            <h4>Column Gap</h4>
+            <input type="text" class="style-input" id="column_gap_xl" />
+            <input type="text" class="style-input" id="column_gap_lg" />
+            <input type="text" class="style-input" id="column_gap_md" />
+            <input type="text" class="style-input" id="column_gap_sm" />
+            <h4>Tile Margin</h4>
+            <input
+              type="text"
+              class="style-input"
+              id="content_tile_margin_xl"
+            />
+            <input
+              type="text"
+              class="style-input"
+              id="content_tile_margin_lg"
+            />
+            <input
+              type="text"
+              class="style-input"
+              id="content_tile_margin_md"
+            />
+            <input
+              type="text"
+              class="style-input"
+              id="content_tile_margin_sm"
+            />
+          </fieldset>
+        </section>
+        <h2>Styles</h2>
+        <section class="definition">
+          <h3>H1</h3>
+          <fieldset>
+            <h4>Font size</h4>
+            <input type="text" class="style-input" id="h1_fontSize_xl" />
+            <input type="text" class="style-input" id="h1_fontSize_lg" />
+            <input type="text" class="style-input" id="h1_fontSize_md" />
+            <input type="text" class="style-input" id="h1_fontSize_sm" />
+          </fieldset>
+          <fieldset>
+            <h4>Line height</h4>
+            <input type="text" class="style-input" id="h1_lineHeight_xl" />
+            <input type="text" class="style-input" id="h1_lineHeight_lg" />
+            <input type="text" class="style-input" id="h1_lineHeight_md" />
+            <input type="text" class="style-input" id="h1_lineHeight_sm" />
+          </fieldset>
+          <fieldset>
+            <h4>Letter Spacing</h4>
+            <input type="text" class="style-input" id="h1_letterSpacing_xl" />
+            <input type="text" class="style-input" id="h1_letterSpacing_lg" />
+            <input type="text" class="style-input" id="h1_letterSpacing_md" />
+            <input type="text" class="style-input" id="h1_letterSpacing_sm" />
+          </fieldset>
+        </section>
+        <section class="definition">
+          <h3>H2</h3>
+          <fieldset>
+            <h4>Font size</h4>
+            <input type="text" class="style-input" id="h2_fontSize_xl" />
+            <input type="text" class="style-input" id="h2_fontSize_lg" />
+            <input type="text" class="style-input" id="h2_fontSize_md" />
+            <input type="text" class="style-input" id="h2_fontSize_sm" />
+          </fieldset>
+          <fieldset>
+            <h4>Line height</h4>
+            <input type="text" class="style-input" id="h2_lineHeight_xl" />
+            <input type="text" class="style-input" id="h2_lineHeight_lg" />
+            <input type="text" class="style-input" id="h2_lineHeight_md" />
+            <input type="text" class="style-input" id="h2_lineHeight_sm" />
+          </fieldset>
+          <fieldset>
+            <h4>Letter Spacing</h4>
+            <input type="text" class="style-input" id="h2_letterSpacing_xl" />
+            <input type="text" class="style-input" id="h2_letterSpacing_lg" />
+            <input type="text" class="style-input" id="h2_letterSpacing_md" />
+            <input type="text" class="style-input" id="h2_letterSpacing_sm" />
+          </fieldset>
+        </section>
+        <section class="definition">
+          <h3>H3</h3>
+          <fieldset>
+            <h4>Font size</h4>
+            <input type="text" class="style-input" id="h3_fontSize_xl" />
+            <input type="text" class="style-input" id="h3_fontSize_lg" />
+            <input type="text" class="style-input" id="h3_fontSize_md" />
+            <input type="text" class="style-input" id="h3_fontSize_sm" />
+          </fieldset>
+          <fieldset>
+            <h4>Line height</h4>
+            <input type="text" class="style-input" id="h3_lineHeight_xl" />
+            <input type="text" class="style-input" id="h3_lineHeight_lg" />
+            <input type="text" class="style-input" id="h3_lineHeight_md" />
+            <input type="text" class="style-input" id="h3_lineHeight_sm" />
+          </fieldset>
+          <fieldset>
+            <h4>Letter Spacing</h4>
+            <input type="text" class="style-input" id="h3_letterSpacing_xl" />
+            <input type="text" class="style-input" id="h3_letterSpacing_lg" />
+            <input type="text" class="style-input" id="h3_letterSpacing_md" />
+            <input type="text" class="style-input" id="h3_letterSpacing_sm" />
+          </fieldset>
+        </section>
+        <section class="definition">
+          <h3>H4</h3>
+          <fieldset>
+            <h4>Font size</h4>
+            <input type="text" class="style-input" id="h4_fontSize_xl" />
+            <input type="text" class="style-input" id="h4_fontSize_lg" />
+            <input type="text" class="style-input" id="h4_fontSize_md" />
+            <input type="text" class="style-input" id="h4_fontSize_sm" />
+          </fieldset>
+          <fieldset>
+            <h4>Line height</h4>
+            <input type="text" class="style-input" id="h4_lineHeight_xl" />
+            <input type="text" class="style-input" id="h4_lineHeight_lg" />
+            <input type="text" class="style-input" id="h4_lineHeight_md" />
+            <input type="text" class="style-input" id="h4_lineHeight_sm" />
+          </fieldset>
+          <fieldset>
+            <h4>Letter Spacing</h4>
+            <input type="text" class="style-input" id="h4_letterSpacing_xl" />
+            <input type="text" class="style-input" id="h4_letterSpacing_lg" />
+            <input type="text" class="style-input" id="h4_letterSpacing_md" />
+            <input type="text" class="style-input" id="h4_letterSpacing_sm" />
+          </fieldset>
+        </section>
+        <section class="definition">
+          <h3>P Large</h3>
+          <fieldset>
+            <h4>Font size</h4>
+            <input type="text" class="style-input" id="pLg_fontSize_xl" />
+            <input type="text" class="style-input" id="pLg_fontSize_lg" />
+            <input type="text" class="style-input" id="pLg_fontSize_md" />
+            <input type="text" class="style-input" id="pLg_fontSize_sm" />
+          </fieldset>
+          <fieldset>
+            <h4>Line height</h4>
+            <input type="text" class="style-input" id="pLg_lineHeight_xl" />
+            <input type="text" class="style-input" id="pLg_lineHeight_lg" />
+            <input type="text" class="style-input" id="pLg_lineHeight_md" />
+            <input type="text" class="style-input" id="pLg_lineHeight_sm" />
+          </fieldset>
+          <fieldset>
+            <h4>Letter Spacing</h4>
+            <input type="text" class="style-input" id="pLg_letterSpacing_xl" />
+            <input type="text" class="style-input" id="pLg_letterSpacing_lg" />
+            <input type="text" class="style-input" id="pLg_letterSpacing_md" />
+            <input type="text" class="style-input" id="pLg_letterSpacing_sm" />
+          </fieldset>
+        </section>
+        <section class="definition">
+          <h3>P Small</h3>
+          <fieldset>
+            <h4>Font size</h4>
+            <input type="text" class="style-input" id="pSm_fontSize_xl" />
+            <input type="text" class="style-input" id="pSm_fontSize_lg" />
+            <input type="text" class="style-input" id="pSm_fontSize_md" />
+            <input type="text" class="style-input" id="pSm_fontSize_sm" />
+          </fieldset>
+          <fieldset>
+            <h4>Line height</h4>
+            <input type="text" class="style-input" id="pSm_lineHeight_xl" />
+            <input type="text" class="style-input" id="pSm_lineHeight_lg" />
+            <input type="text" class="style-input" id="pSm_lineHeight_md" />
+            <input type="text" class="style-input" id="pSm_lineHeight_sm" />
+          </fieldset>
+          <fieldset>
+            <h4>Letter Spacing</h4>
+            <input type="text" class="style-input" id="pSm_letterSpacing_xl" />
+            <input type="text" class="style-input" id="pSm_letterSpacing_lg" />
+            <input type="text" class="style-input" id="pSm_letterSpacing_md" />
+            <input type="text" class="style-input" id="pSm_letterSpacing_sm" />
+          </fieldset>
+        </section>
+        <input class="section-cta sticky" type="submit" value="Update" />
+      </form>
+      <details class="export-import">
+        <summary>Export</summary>
+        <div>
+          <textarea id="style_export" rows="20"></textarea>
+        </div>
+      </details>
+      <details class="export-import">
+        <summary>Import</summary>
+        <div>
+          <textarea
+            id="style_import"
+            rows="20"
+            placeholder="Paste exported JSON here"
+          ></textarea>
+          <input
+            class="section-cta"
+            type="button"
+            value="Import"
+            onclick="importStyles()"
+          />
+          <input
+            class="section-cta danger"
+            type="button"
+            value="Reset to Defaults [TK]"
+          />
+        </div>
+      </details>
+    </details>
+    <section id="layouts">
+      <div class="content-block">
+        <aside>H1 & P Large</aside>
+        <h1 contenteditable="true">
+          Hello there! This is text for testing this proof of concept.
+        </h1>
+        <p class="large" contenteditable="true">
+          Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+          sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+          dignissim. Maecenas blandit pulvinar velit, sit amet suscipit nunc.
+          Nam bibendum mauris condimentum quam porta laoreet. Curabitur dictum
+          libero sapien, a fermentum nisi interdum non. In nec nibh viverra,
+          tristique nunc eget, egestas ante. Vestibulum ante ipsum primis in
+          faucibus orci luctus et ultrices posuere cubilia curae; Fusce
+          venenatis, urna sed cursus pellentesque, ante felis pharetra lacus,
+          nec ultrices magna lectus nec arcu. Aenean semper orci mauris, quis
+          gravida est volutpat id.
+        </p>
+      </div>
+
+      <div class="content-block col-2">
+        <aside>H1 + P Large</aside>
+        <div class="col">
+          <h1 contenteditable="true">This is text for proof of concept.</h1>
+        </div>
+        <div class="col">
+          <p class="large" contenteditable="true">
+            Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+            sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+            dignissim. Maecenas blandit pulvinar velit, sit amet suscipit nunc.
+            Nam bibendum mauris condimentum quam porta laoreet. Curabitur dictum
+            libero sapien, a fermentum nisi interdum non. In nec nibh viverra,
+            tristique nunc eget, egestas ante. Vestibulum ante ipsum primis in
+            faucibus orci luctus et ultrices posuere cubilia curae; Fusce
+            venenatis, urna sed cursus pellentesque, ante felis pharetra lacus,
+            nec ultrices magna lectus nec arcu. Aenean semper orci mauris, quis
+            gravida est volutpat id.
+          </p>
+        </div>
+      </div>
+
+      <div class="content-block">
+        <aside>H2 & P Large</aside>
+        <h2 contenteditable="true">
+          Hello there! This is text for testing this proof of concept.
+        </h2>
+        <p class="large" contenteditable="true">
+          Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+          sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+          dignissim. Maecenas blandit pulvinar velit, sit amet suscipit nunc.
+          Nam bibendum mauris condimentum quam porta laoreet. Curabitur dictum
+          libero sapien, a fermentum nisi interdum non. In nec nibh viverra,
+          tristique nunc eget, egestas ante. Vestibulum ante ipsum primis in
+          faucibus orci luctus et ultrices posuere cubilia curae; Fusce
+          venenatis, urna sed cursus pellentesque, ante felis pharetra lacus,
+          nec ultrices magna lectus nec arcu. Aenean semper orci mauris, quis
+          gravida est volutpat id.
+        </p>
+      </div>
+
+      <div class="content-block col-2">
+        <aside>H2 + P Large</aside>
+        <div class="col">
+          <h2 contenteditable="true">This is text for proof of concept.</h2>
+        </div>
+        <div class="col">
+          <p class="large" contenteditable="true">
+            Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+            sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+            dignissim. Maecenas blandit pulvinar velit, sit amet suscipit nunc.
+            Nam bibendum mauris condimentum quam porta laoreet. Curabitur dictum
+            libero sapien, a fermentum nisi interdum non. In nec nibh viverra,
+            tristique nunc eget, egestas ante. Vestibulum ante ipsum primis in
+            faucibus orci luctus et ultrices posuere cubilia curae; Fusce
+            venenatis, urna sed cursus pellentesque, ante felis pharetra lacus,
+            nec ultrices magna lectus nec arcu. Aenean semper orci mauris, quis
+            gravida est volutpat id.
+          </p>
+        </div>
+      </div>
+
+      <div class="content-block col-2">
+        <aside>H3 + P Large</aside>
+        <div class="col">
+          <h3>Hello there! This is text for testing this proof of concept.</h3>
+          <p class="large" contenteditable="true">
+            Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+            sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+            dignissim. Maecenas blandit pulvinar velit, sit amet suscipit nunc.
+            Nam bibendum mauris condimentum quam porta laoreet. Curabitur dictum
+            libero sapien, a fermentum nisi interdum non. In nec nibh viverra,
+            tristique nunc eget, egestas ante. Vestibulum ante ipsum primis in
+            faucibus orci luctus et ultrices posuere cubilia curae; Fusce
+            venenatis, urna sed cursus pellentesque, ante felis pharetra lacus,
+            nec ultrices magna lectus nec arcu. Aenean semper orci mauris, quis
+            gravida est volutpat id.
+          </p>
+        </div>
+        <div class="col">
+          <h3>Hello there! This is text for testing this proof of concept.</h3>
+          <p class="large" contenteditable="true">
+            Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+            sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+            dignissim. Maecenas blandit pulvinar velit, sit amet suscipit nunc.
+            Nam bibendum mauris condimentum quam porta laoreet. Curabitur dictum
+            libero sapien, a fermentum nisi interdum non. In nec nibh viverra,
+            tristique nunc eget, egestas ante. Vestibulum ante ipsum primis in
+            faucibus orci luctus et ultrices posuere cubilia curae; Fusce
+            venenatis, urna sed cursus pellentesque, ante felis pharetra lacus,
+            nec ultrices magna lectus nec arcu. Aenean semper orci mauris, quis
+            gravida est volutpat id.
+          </p>
+        </div>
+      </div>
+
+      <div class="content-block col-2">
+        <aside>H3 + P Small</aside>
+        <div class="col tile">
+          <h3>Hello there! This is text for testing this proof of concept.</h3>
+          <p class="small" contenteditable="true">
+            Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+            sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+            dignissim. Maecenas blandit pulvinar velit, sit amet suscipit nunc.
+            Nam bibendum mauris condimentum quam porta laoreet. Curabitur dictum
+            libero sapien, a fermentum nisi interdum non. In nec nibh viverra,
+            tristique nunc eget, egestas ante. Vestibulum ante ipsum primis in
+            faucibus orci luctus et ultrices posuere cubilia curae; Fusce
+            venenatis, urna sed cursus pellentesque, ante felis pharetra lacus,
+            nec ultrices magna lectus nec arcu. Aenean semper orci mauris, quis
+            gravida est volutpat id.
+          </p>
+        </div>
+        <div class="col tile">
+          <h3>Hello there! This is text for testing this proof of concept.</h3>
+          <p class="small" contenteditable="true">
+            Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+            sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+            dignissim. Maecenas blandit pulvinar velit, sit amet suscipit nunc.
+            Nam bibendum mauris condimentum quam porta laoreet. Curabitur dictum
+            libero sapien, a fermentum nisi interdum non. In nec nibh viverra,
+            tristique nunc eget, egestas ante. Vestibulum ante ipsum primis in
+            faucibus orci luctus et ultrices posuere cubilia curae; Fusce
+            venenatis, urna sed cursus pellentesque, ante felis pharetra lacus,
+            nec ultrices magna lectus nec arcu. Aenean semper orci mauris, quis
+            gravida est volutpat id.
+          </p>
+        </div>
+      </div>
+
+      <div class="content-block col-4">
+        <aside>H4 + P Large</aside>
+        <div class="col">
+          <h4>Hello there! This is text for testing.</h4>
+          <p class="small" contenteditable="true">
+            Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+            sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+            dignissim. Maecenas blandit pulvinar velit, sit amet suscipit nunc.
+          </p>
+        </div>
+        <div class="col">
+          <h4>Hello there! This is text for testing.</h4>
+          <p class="small" contenteditable="true">
+            Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+            sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+            dignissim. Maecenas blandit pulvinar velit, sit amet suscipit nunc.
+          </p>
+        </div>
+        <div class="col">
+          <h4>Hello there! This is text for testing.</h4>
+          <p class="small" contenteditable="true">
+            Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+            sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+            dignissim. Maecenas blandit pulvinar velit, sit amet suscipit nunc.
+          </p>
+        </div>
+        <div class="col">
+          <h4>Hello there! This is text for testing.</h4>
+          <p class="small" contenteditable="true">
+            Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+            sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+            dignissim. Maecenas blandit pulvinar velit, sit amet suscipit nunc.
+          </p>
+        </div>
+      </div>
+
+      <div class="content-block col-3">
+        <aside>H4 + P Large</aside>
+        <div class="col">
+          <h4>Hello there! This is text for testing this proof of concept.</h4>
+          <p class="large" contenteditable="true">
+            Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+            sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+            dignissim. Maecenas blandit pulvinar velit, sit amet suscipit nunc.
+            Nam bibendum mauris condimentum quam porta laoreet. Curabitur dictum
+            libero sapien, a fermentum nisi interdum non. In nec nibh viverra,
+            tristique nunc eget, egestas ante. Vestibulum ante ipsum primis in
+            faucibus orci luctus et ultrices posuere cubilia curae; Fusce
+            venenatis, urna sed cursus pellentesque, ante felis pharetra lacus,
+            nec ultrices magna lectus nec arcu. Aenean semper orci mauris, quis
+            gravida est volutpat id.
+          </p>
+        </div>
+        <div class="col">
+          <h4>Hello there! This is text for testing this proof of concept.</h4>
+          <p class="large" contenteditable="true">
+            Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+            sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+            dignissim. Maecenas blandit pulvinar velit, sit amet suscipit nunc.
+            Nam bibendum mauris condimentum quam porta laoreet. Curabitur dictum
+            libero sapien, a fermentum nisi interdum non. In nec nibh viverra,
+            tristique nunc eget, egestas ante. Vestibulum ante ipsum primis in
+            faucibus orci luctus et ultrices posuere cubilia curae; Fusce
+            venenatis, urna sed cursus pellentesque, ante felis pharetra lacus,
+            nec ultrices magna lectus nec arcu. Aenean semper orci mauris, quis
+            gravida est volutpat id.
+          </p>
+        </div>
+        <div class="col">
+          <h4>Hello there! This is text for testing this proof of concept.</h4>
+          <p class="large" contenteditable="true">
+            Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+            sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+            dignissim. Maecenas blandit pulvinar velit, sit amet suscipit nunc.
+            Nam bibendum mauris condimentum quam porta laoreet. Curabitur dictum
+            libero sapien, a fermentum nisi interdum non. In nec nibh viverra,
+            tristique nunc eget, egestas ante. Vestibulum ante ipsum primis in
+            faucibus orci luctus et ultrices posuere cubilia curae; Fusce
+            venenatis, urna sed cursus pellentesque, ante felis pharetra lacus,
+            nec ultrices magna lectus nec arcu. Aenean semper orci mauris, quis
+            gravida est volutpat id.
+          </p>
+        </div>
+      </div>
+
+      <div class="content-block col-3">
+        <aside>H4 + P Large</aside>
+        <div class="col tile">
+          <h4>Hello there! This is text for testing this proof of concept.</h4>
+          <p class="large" contenteditable="true">
+            Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+            sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+            dignissim. Maecenas blandit pulvinar velit, sit amet suscipit nunc.
+            Nam bibendum mauris condimentum quam porta laoreet. Curabitur dictum
+            libero sapien, a fermentum nisi interdum non. In nec nibh viverra,
+            tristique nunc eget, egestas ante. Vestibulum ante ipsum primis in
+            faucibus orci luctus et ultrices posuere cubilia curae; Fusce
+            venenatis, urna sed cursus pellentesque, ante felis pharetra lacus,
+            nec ultrices magna lectus nec arcu. Aenean semper orci mauris, quis
+            gravida est volutpat id.
+          </p>
+        </div>
+        <div class="col tile">
+          <h4>Hello there! This is text for testing this proof of concept.</h4>
+          <p class="large" contenteditable="true">
+            Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+            sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+            dignissim. Maecenas blandit pulvinar velit, sit amet suscipit nunc.
+            Nam bibendum mauris condimentum quam porta laoreet. Curabitur dictum
+            libero sapien, a fermentum nisi interdum non. In nec nibh viverra,
+            tristique nunc eget, egestas ante. Vestibulum ante ipsum primis in
+            faucibus orci luctus et ultrices posuere cubilia curae; Fusce
+            venenatis, urna sed cursus pellentesque, ante felis pharetra lacus,
+            nec ultrices magna lectus nec arcu. Aenean semper orci mauris, quis
+            gravida est volutpat id.
+          </p>
+        </div>
+        <div class="col tile">
+          <h4>Hello there! This is text for testing this proof of concept.</h4>
+          <p class="large" contenteditable="true">
+            Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+            sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+            dignissim. Maecenas blandit pulvinar velit, sit amet suscipit nunc.
+            Nam bibendum mauris condimentum quam porta laoreet. Curabitur dictum
+            libero sapien, a fermentum nisi interdum non. In nec nibh viverra,
+            tristique nunc eget, egestas ante. Vestibulum ante ipsum primis in
+            faucibus orci luctus et ultrices posuere cubilia curae; Fusce
+            venenatis, urna sed cursus pellentesque, ante felis pharetra lacus,
+            nec ultrices magna lectus nec arcu. Aenean semper orci mauris, quis
+            gravida est volutpat id.
+          </p>
+        </div>
+      </div>
+
+      <div class="content-block col-4">
+        <aside>H4 + P Small</aside>
+        <div class="col tile">
+          <h4>This is for testing.</h4>
+          <p class="small" contenteditable="true">
+            Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+            sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+            dignissim.
+          </p>
+        </div>
+        <div class="col tile">
+          <h4>This is for testing.</h4>
+          <p class="small" contenteditable="true">
+            Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+            sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+            dignissim.
+          </p>
+        </div>
+        <div class="col tile">
+          <h4>This is for testing.</h4>
+          <p class="small" contenteditable="true">
+            Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+            sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+            dignissim.
+          </p>
+        </div>
+        <div class="col tile">
+          <h4>This is for testing.</h4>
+          <p class="small" contenteditable="true">
+            Suspendisse placerat metus ac tristique imperdiet. Cras posuere quis
+            sapien in sollicitudin. Quisque commodo mi quis nibh eleifend
+            dignissim.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <script type="text/javascript" src="site.js"></script>
+  </body>
+</html>

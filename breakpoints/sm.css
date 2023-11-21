@@ -1,0 +1,57 @@
+.content-block {
+  column-gap: calc(var(--column_gap_sm, 1rem));
+  margin-left: calc(var(--page_margin_sm, 0));
+  margin-right: calc(var(--page_margin_sm, 0));
+}
+
+.content-block.col-2,
+.content-block.col-3,
+.content-block.col-4,
+.content-block.col-6 {
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.content-block.col-2 .col,
+.content-block.col-2 .col {
+  grid-column: span 1;
+}
+
+.tile {
+  padding: calc(var(--content_tile_margin_sm, 1rem));
+}
+
+#layouts h1 {
+  font-size: calc(var(--h1_fontSize_sm));
+  line-height: calc(var(--h1_lineHeight_sm));
+  letter-spacing: calc(var(--h1_letterSpacing_sm));
+}
+
+#layouts h2 {
+  font-size: calc(var(--h2_fontSize_sm));
+  line-height: calc(var(--h2_lineHeight_sm));
+  letter-spacing: calc(var(--h2_letterSpacing_sm));
+}
+
+#layouts h3 {
+  font-size: calc(var(--h3_fontSize_sm));
+  line-height: calc(var(--h3_lineHeight_sm));
+  letter-spacing: calc(var(--h3_letterSpacing_sm));
+}
+
+#layouts h4 {
+  font-size: calc(var(--h4_fontSize_sm));
+  line-height: calc(var(--h4_lineHeight_sm));
+  letter-spacing: calc(var(--h4_letterSpacing_sm));
+}
+
+#layouts p.large {
+  font-size: calc(var(--pLg_fontSize_sm));
+  line-height: calc(var(--pLg_lineHeight_sm));
+  letter-spacing: calc(var(--pLg_letterSpacing_sm));
+}
+
+#layouts p.small {
+  font-size: calc(var(--pSm_fontSize_sm));
+  line-height: calc(var(--pSm_lineHeight_sm));
+  letter-spacing: calc(var(--pSm_letterSpacing_sm));
+}
